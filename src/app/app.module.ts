@@ -13,6 +13,7 @@ import { SelectorDialogComponent } from './components/stops/selector-dialog/sele
 import { AuthInterceptor } from './services/AuthInterceptor';
 import { LoginDialogComponent } from './components/accounts/login-dialog/login-dialog.component';
 import { EditComponent } from './components/timetable/edit/edit.component';
+import { DetailsComponent } from './components/timetable/details/details.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { EditComponent } from './components/timetable/edit/edit.component';
     ItemComponent,
     SelectorDialogComponent,
     LoginDialogComponent,
-    EditComponent
+    EditComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,

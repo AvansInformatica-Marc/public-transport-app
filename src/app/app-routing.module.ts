@@ -5,11 +5,11 @@ import { EditComponent } from './components/timetable/edit/edit.component';
 import { DetailsComponent } from './components/timetable/details/details.component';
 
 const routes: Routes = [
-  { path: "timetable", component: TimetableComponent, children: [
-    { path: "new", component: EditComponent },
-    { path: ":id", component: DetailsComponent },
-    { path: ":id/edit", component: EditComponent }
-  ] }
+  { path: "timetable", component: TimetableComponent },
+  { path: "timetable/new", component: EditComponent },
+  { path: "timetable/:id", component: DetailsComponent },
+  { path: "timetable/:id/edit", component: EditComponent },
+  { path: '', redirectTo: '/timetable', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -16,7 +16,6 @@ import { LoginDialogComponent } from '../accounts/login-dialog/login-dialog.comp
 })
 export class TimetableComponent implements OnInit {
   public settings = localStorage
-  public title: string = 'Public Transport timetable';
   public selectedStop?: Stop
   public timetable: Ride[] = [];
 

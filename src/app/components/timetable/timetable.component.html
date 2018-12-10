@@ -1,0 +1,18 @@
+<header class="mat-elevation-z4">
+    <h3 *ngIf="selectedStop" (click)="openStopSelector()" class="title">{{selectedStop.name}}</h3>
+    <h3 *ngIf="!selectedStop" (click)="openStopSelector()">Select stop to show timetable</h3>
+
+    <span style="flex: 1 1 auto;"></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="userMenu"><mat-icon>account_circle</mat-icon></button>
+
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item *ngIf="!settings.getItem('accountToken')" (click)="login()">Login</button>
+      <button mat-menu-item *ngIf="settings.getItem('accountToken')" (click)="logout()">Logout</button>
+    </mat-menu>
+</header>
+<main>
+  <app-timetable-item *ngFor="let ride of timetable" [ride]="ride"></app-timetable-item>
+</main>
+
+<button mat-fab *ngIf="selectedStop && settings.getItem('accountToken')" style="position:fixed; bottom: 32px; right: 32px; background-color: #003082; "><mat-icon>add</mat-icon></button>

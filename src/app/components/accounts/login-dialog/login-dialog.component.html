@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Login</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+      <input type="text" matInput [formControl]="tokenControl" placeholder="Account token" aria-label="Account token">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialogWithoutResult()">Cancel</button>
+  <button mat-button (click)="closeDialogWithResult()">Ok</button>
+</div>

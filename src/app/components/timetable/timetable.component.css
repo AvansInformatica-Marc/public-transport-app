@@ -1,0 +1,26 @@
+header > .title::before {
+    content: "";
+    background-color: #ffffff;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 1px;
+}
+
+header {
+    background-color: #003082; 
+    color: #FAFAFA; 
+    margin: 16px; 
+    padding: 4px 32px; 
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+main {
+    margin: 16px;
+    padding: 4px 32px;
+}

@@ -1,20 +1,54 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule, MatAutocompleteModule, MatInputModule, MatDividerModule, MatDialogModule, MatButtonModule, MatIconModule, MatToolbarModule, MatChipsModule, MatMenuModule } from '@angular/material';
+import { TimetableComponent } from './components/timetable/timetable.component';
+import { ItemComponent } from './components/timetable/item/item.component';
+import { SelectorDialogComponent } from './components/stops/selector-dialog/selector-dialog.component';
+import { AuthInterceptor } from './services/AuthInterceptor';
+import { LoginDialogComponent } from './components/accounts/login-dialog/login-dialog.component';
+import { EditComponent } from './components/timetable/edit/edit.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TimetableComponent,
+    ItemComponent,
+    SelectorDialogComponent,
+    LoginDialogComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatChipsModule,
+    MatMenuModule
   ],
-  providers: [],
+  entryComponents: [
+    SelectorDialogComponent,
+    LoginDialogComponent
+  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

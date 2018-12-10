@@ -1,0 +1,25 @@
+<p style="clear: both;">
+  <span *ngIf="ride.stops[ride.stops.length - 1].stop.name" style="font-weight: bold;">{{ride.stops[ride.stops.length - 1].stop.name}}</span>
+  <span style="float:right;"><img *ngIf="ride.operator.logo" src="{{ride.operator.logo}}" style="max-height: 1em;vertical-align: middle;"> {{ride.type}}</span>
+</p>
+
+<div *ngFor="let train of ride.train" style="display: inline-block;">
+  <img *ngIf="train.image" src="{{train.image}}" style="max-height: 50px;">
+</div>
+
+<p>
+  Departures: <mat-chip-list><mat-chip *ngFor="let departure of ride.departures">{{departure}}</mat-chip></mat-chip-list>
+</p>
+
+<p *ngIf="ride.excludeDays.length > 0">
+  Not on: <mat-chip-list><mat-chip *ngFor="let exclusion of ride.excludeDays">{{days[exclusion]}}</mat-chip></mat-chip-list>
+</p>
+
+<div style="display: flex;">
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-raised-button *ngIf="settings.getItem('accountToken')">Edit</button>
+</div>
+
+<br>
+
+<mat-divider></mat-divider>

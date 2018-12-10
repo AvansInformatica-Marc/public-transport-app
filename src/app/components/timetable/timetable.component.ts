@@ -8,6 +8,7 @@ import { TrainService } from 'src/app/services/train.service';
 import { MatDialog } from '@angular/material';
 import { SelectorDialogComponent } from '../stops/selector-dialog/selector-dialog.component';
 import { LoginDialogComponent } from '../accounts/login-dialog/login-dialog.component';
+import { ComponentType } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-timetable',
@@ -19,54 +20,35 @@ export class TimetableComponent implements OnInit {
   public selectedStop?: Stop
   public timetable: Ride[] = [];
 
-  constructor(protected stopService: StopService, 
-    protected timetableService: TimetableService, 
-    protected operatorService: OperatorService,
-    protected trainService: TrainService,
-    public dialog: MatDialog){}
+  constructor(protected timetableService: TimetableService, public dialog: MatDialog){}
 
   public ngOnInit() {}
 
-  public openStopSelector(){
-    const dialogRef = this.dialog.open(SelectorDialogComponent, { width: '250px' })
-    dialogRef.afterClosed().subscribe((result: Stop | null) => {
-      if(result){
-        this.selectedStop = result
-        this.loadTimetable()
-      }
-    })
+  public async openStopSelector(){
+    const stop = await this.openDialog<Stop | null>(SelectorDialogComponent)
+    if(stop){
+      this.selectedStop = stop
+      this.loadTimetable()
+    }
   }
 
   public async loadTimetable(){
     this.timetable = await this.timetableService.getAll(this.selectedStop._id)
-    this.timetable.forEach(async ride => {
-      if(typeof ride.operator == "string")
-      ride.operator = await this.operatorService.getById(ride.operator)
-
-      if(ride.train){
-        ride.train.forEach(async (trainId, index) => {
-          if(typeof trainId == "string")
-            ride.train[index] = await this.trainService.getById(trainId)
-        })
-      }
-
-      if(ride.stops){
-        ride.stops.forEach(async (stop, index) => {
-          if(typeof stop.stop == "string")
-            ride.stops[index].stop = await this.stopService.getById(stop.stop)
-        })
-      }
-    })
   }
 
-  public login(){
-    const dialogRef = this.dialog.open(LoginDialogComponent, { width: '250px' })
-    dialogRef.afterClosed().subscribe((result: string | null) => {
-      if(result) this.settings.setItem("accountToken", result)
-    })
+  public async login(){
+    const token = await this.openDialog<string | null>(LoginDialogComponent)
+    if(token) this.settings.setItem("accountToken", token)
   }
 
   public logout(){
     this.settings.removeItem("accountToken")
+  }
+
+  private openDialog<T, C = any>(component: ComponentType<C>): Promise<T>{
+    return new Promise((resolve, reject) => {
+      const dialog = this.dialog.open(component, { width: '300px' })
+      dialog.afterClosed().subscribe((result: T) => resolve(result))
+    })
   }
 }

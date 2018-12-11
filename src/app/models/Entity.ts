@@ -1,1 +1,1 @@
-export type Entity<T> = t & { _id: string }
+export type Entity<T> = T & { _id: string }

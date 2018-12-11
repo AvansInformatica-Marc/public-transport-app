@@ -5,6 +5,7 @@ import { startWith, map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { StopService } from 'src/app/services/stop.service';
 import { MatDialogRef } from '@angular/material';
+import { Entity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-selector-dialog',
@@ -13,25 +14,25 @@ import { MatDialogRef } from '@angular/material';
 })
 export class SelectorDialogComponent implements OnInit {
   public stopControl = new FormControl();
-  public options: Stop[] = [];
-  public filteredOptions: Observable<Stop[]>;
+  public options: Entity<Stop>[] = [];
+  public filteredOptions: Observable<Entity<Stop>[]>;
 
   constructor(protected stopService: StopService, public dialogRef: MatDialogRef<SelectorDialogComponent>){}
 
   public async ngOnInit() {
     this.options = await this.stopService.getAll()
     this.filteredOptions = this.stopControl.valueChanges.pipe(
-      startWith<string | Stop>(''),
+      startWith<string | Entity<Stop>>(''),
       map(value => typeof value === 'string' ? value : value.name),
       map(name => this.filter(name))
     )
   }
 
-  public displayStop(stop?: Stop): string | undefined {
+  public displayStop(stop?: Entity<Stop>): string | undefined {
     return stop ? stop.name : undefined;
   }
 
-  private filter(name?: string): Stop[] {
+  private filter(name?: string): Entity<Stop>[] {
     return name ? this.options.filter(option => option.name.toLowerCase().includes(name.toLowerCase())) : this.options;
   }
 

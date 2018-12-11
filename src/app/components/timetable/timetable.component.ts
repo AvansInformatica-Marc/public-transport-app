@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import Stop from 'src/app/models/Stop';
 import Ride from 'src/app/models/Ride';
-import { StopService } from 'src/app/services/stop.service';
 import { TimetableService } from 'src/app/services/timetable.service';
-import { OperatorService } from 'src/app/services/operator.service';
-import { TrainService } from 'src/app/services/train.service';
 import { MatDialog } from '@angular/material';
 import { SelectorDialogComponent } from '../stops/selector-dialog/selector-dialog.component';
 import { LoginDialogComponent } from '../accounts/login-dialog/login-dialog.component';
 import { ComponentType } from '@angular/cdk/portal';
+import { Entity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-timetable',
@@ -17,15 +15,15 @@ import { ComponentType } from '@angular/cdk/portal';
 })
 export class TimetableComponent implements OnInit {
   public settings = localStorage
-  public selectedStop?: Stop
-  public timetable: Ride[] = [];
+  public selectedStop?: Entity<Stop>
+  public timetable: Entity<Ride>[] = [];
 
   constructor(protected timetableService: TimetableService, public dialog: MatDialog){}
 
   public ngOnInit() {}
 
   public async openStopSelector(){
-    const stop = await this.openDialog<Stop | null>(SelectorDialogComponent)
+    const stop = await this.openDialog<Entity<Stop> | null>(SelectorDialogComponent)
     if(stop){
       this.selectedStop = stop
       this.loadTimetable()

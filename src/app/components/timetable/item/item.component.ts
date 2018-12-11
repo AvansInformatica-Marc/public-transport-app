@@ -3,6 +3,7 @@ import { TrainService } from 'src/app/services/train.service';
 import { OperatorService } from 'src/app/services/operator.service';
 import { StopService } from 'src/app/services/stop.service';
 import Ride from 'src/app/models/Ride';
+import { Entity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-timetable-item',
@@ -13,7 +14,7 @@ export class ItemComponent implements OnInit {
   public settings = localStorage
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-  @Input() ride: Ride;
+  @Input() ride: Entity<Ride>;
 
   constructor(protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService){}
 

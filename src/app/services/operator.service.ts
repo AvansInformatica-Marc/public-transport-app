@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OperatorService implements Repository<Operator> {
   protected cache: Operator[] = []
-  protected static apiUrl: string = "http://localhost:8080/api/v1/operators"
+  protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/operators"
 
   constructor(protected http: HttpClient) {}
   

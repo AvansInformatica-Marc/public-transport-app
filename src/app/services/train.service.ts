@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TrainService implements Repository<Train> {
   protected cache: Train[] = []
-  protected static apiUrl: string = "http://localhost:8080/api/v1/trains"
+  protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/trains"
 
   constructor(protected http: HttpClient) {}
   

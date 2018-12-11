@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TimetableService implements Repository<Ride> {
   protected cache: Ride[] = []
-  protected static apiUrl: string = "http://localhost:8080/api/v1/rides"
+  protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/rides"
 
   constructor(protected http: HttpClient) {}
   

@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StopService implements Repository<Stop> {
   protected cache: Stop[] = []
-  protected static apiUrl: string = "http://localhost:8080/api/v1/stops"
+  protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/stops"
 
   constructor(protected http: HttpClient) {}
   

@@ -2,44 +2,46 @@ import { Injectable } from '@angular/core';
 import Repository from './Repository';
 import Ride from '../models/Ride';
 import { HttpClient } from '@angular/common/http';
+import Cache from './Cache';
+import { Entity } from '../models/Entity';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimetableService implements Repository<Ride> {
-  protected cache: Ride[] = []
+  protected cache: Cache<Ride> = new Cache<Ride>()
   protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/rides"
 
   constructor(protected http: HttpClient) {}
   
-  public async getById(id: string): Promise<Ride> {
-    const cachedItem = this.cache.find(it => it._id == id)
+  public async getById(id: string): Promise<Entity<Ride>> {
+    const cachedItem = this.cache.getById(id)
     if(cachedItem) return cachedItem
 
-    const response = await this.http.get<Ride>(`${TimetableService.apiUrl}/${id}`).toPromise()
-    this.cache.push(response)
+    const response = await this.http.get<Entity<Ride>>(`${TimetableService.apiUrl}/${id}`).toPromise()
+    this.cache.add(response)
     return response
   }
   
-  public async getAll(stopId?: string): Promise<Ride[]> {
-    const response = await this.http.get<Ride[]>(`${TimetableService.apiUrl}${stopId ? `?stopId=${stopId}` : ""}`).toPromise()
-    this.cache.push(...response.filter(ride => !this.cache.some(it => it._id == ride._id)))
+  public async getAll(stopId?: string): Promise<Entity<Ride>[]> {
+    const response = await this.http.get<Entity<Ride>[]>(`${TimetableService.apiUrl}${stopId ? `?stopId=${stopId}` : ""}`).toPromise()
+    this.cache.add(...response.filter(ride => !this.cache.doesItemExist(ride._id)))
     return response
   }
   
-  public async create(model: Ride): Promise<Ride> {
-    const response = await this.http.post<Ride>(`${TimetableService.apiUrl}`, model).toPromise()
-    this.cache.push(response)
+  public async create(model: Ride): Promise<Entity<Ride>> {
+    const response = await this.http.post<Entity<Ride>>(`${TimetableService.apiUrl}`, model).toPromise()
+    this.cache.add(response)
     return response
   }
   
   public async update(id: string, model: Ride): Promise<void> {
     await this.http.put<Ride>(`${TimetableService.apiUrl}/${id}`, model).toPromise()
-    this.cache.splice(this.cache.findIndex(it => it._id == id), 1, model)
+    this.cache.update(id, model)
   }
   
   public async delete(id: string): Promise<void> {
     await this.http.delete<Ride>(`${TimetableService.apiUrl}/${id}`).toPromise()
-    this.cache.splice(this.cache.findIndex(it => it._id == id), 1)
+    this.cache.delete(id)
   }
 }

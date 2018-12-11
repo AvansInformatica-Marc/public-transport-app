@@ -3,7 +3,6 @@ import Train from './Train';
 import Stop from './Stop';
 
 export default interface Ride {
-    _id?: string
     operator: string | Operator // NS, Qbuzz
     type: string // Sprinter, R-NET, R-NET stoptrein, StadsBuzz
     train?: (string | Train)[], // ID

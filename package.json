@@ -1,15 +1,20 @@
 {
   "name": "public-transport",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "main": "server.js",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "node .",
     "heroku-postbuild": "ng build --prod ",
     "start-local": "ng serve --open",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "10.13.0",
+    "npm": "6.4.1"
   },
   "private": true,
   "dependencies": {

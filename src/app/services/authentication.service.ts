@@ -23,7 +23,7 @@ export class AuthenticationService {
   }
 
   public get isAdmin(){
-    return (this.user as { admin?: boolean }).admin
+    return this.user && (this.user as { admin?: boolean }).admin
   }
 
   public async restore(){

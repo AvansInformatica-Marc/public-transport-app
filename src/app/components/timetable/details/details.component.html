@@ -1,4 +1,6 @@
 <header>
+  <button mat-icon-button routerLink="/timetable/"><mat-icon>arrow_back</mat-icon></button>
+
   <h3 *ngIf="!ride">Ride details</h3>
   <h3 *ngIf="ride">{{ride.operator.name}} {{ride.type}}<span *ngIf="ride.stops[ride.stops.length - 1].stop.name"> to {{ride.stops[ride.stops.length - 1].stop.name}}</span></h3>
 </header>

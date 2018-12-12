@@ -8,6 +8,7 @@
 
     <mat-menu #userMenu="matMenu">
       <button mat-menu-item *ngIf="!authService.isLoggedIn" (click)="login()">Login</button>
+      <button mat-menu-item *ngIf="authService.isAdmin" (click)="newAccount()">Create new account</button>
       <button mat-menu-item *ngIf="authService.isLoggedIn" (click)="logout()">Logout</button>
     </mat-menu>
 </header>

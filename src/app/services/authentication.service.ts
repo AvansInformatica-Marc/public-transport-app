@@ -22,6 +22,10 @@ export class AuthenticationService {
     return this.token && this.user ? true : false
   }
 
+  public get isAdmin(){
+    return this.user && (this.user as { admin?: boolean }).admin
+  }
+
   public async restore(){
     await this.login(this.token)
   }

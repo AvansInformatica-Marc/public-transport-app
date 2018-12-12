@@ -2,17 +2,16 @@ import { Injectable } from '@angular/core';
 import Repository from './Repository';
 import Stop from '../models/Stop';
 import { HttpClient } from '@angular/common/http';
-import Cache from "./Cache"
 import { Entity } from '../models/Entity';
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StopService implements Repository<Stop> {
-  protected cache: Cache<Stop> = new Cache<Stop>()
   protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/stops"
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, protected cache: CacheService<Stop>) {}
   
   public async getById(id: string): Promise<Entity<Stop>> {
     const cachedItem = this.cache.getById(id)

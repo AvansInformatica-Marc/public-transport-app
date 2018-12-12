@@ -3,16 +3,15 @@ import Repository from './Repository';
 import Operator from '../models/Operator';
 import { HttpClient } from '@angular/common/http';
 import { Entity } from '../models/Entity';
-import Cache from "./Cache"
+import { CacheService } from './cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OperatorService implements Repository<Operator> {
-  protected cache: Cache<Operator> = new Cache<Operator>()
   protected static apiUrl: string = "https://ov-api.herokuapp.com/api/v1/operators"
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient, protected cache: CacheService<Operator>) {}
   
   public async getById(id: string): Promise<Entity<Operator>> {
     const cachedItem = this.cache.getById(id)

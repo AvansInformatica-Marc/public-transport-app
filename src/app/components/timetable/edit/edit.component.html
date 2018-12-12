@@ -7,7 +7,7 @@
 
     <span style="flex: 1 1 auto;"></span>
 
-    <button mat-icon-button *ngIf="id && settings.getItem('accountToken')" (click)="deleteItem(id)"><mat-icon>delete</mat-icon></button>
+    <button mat-icon-button *ngIf="id" (click)="deleteItem(id)"><mat-icon>delete</mat-icon></button>
   </mat-toolbar>
 </header>
 <main>

@@ -6,8 +6,8 @@
 
   <span style="flex: 1 1 auto;"></span>
 
-  <button mat-icon-button *ngIf="settings.getItem('accountToken')" routerLink="/timetable/{{ride._id}}/edit"><mat-icon>edit</mat-icon></button>
-  <button mat-icon-button *ngIf="settings.getItem('accountToken')" (click)="deleteItem(ride._id)"><mat-icon>delete</mat-icon></button>
+  <button mat-icon-button *ngIf="authService.isLoggedIn" routerLink="/timetable/{{ride._id}}/edit"><mat-icon>edit</mat-icon></button>
+  <button mat-icon-button *ngIf="authService.isLoggedIn" (click)="deleteItem(ride._id)"><mat-icon>delete</mat-icon></button>
 </header>
 <main *ngIf="ride">
   <table>

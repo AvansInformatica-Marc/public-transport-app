@@ -16,7 +16,6 @@ import { SelectorDialogComponent } from '../../stops/selector-dialog/selector-di
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  public settings = localStorage
   public id: string | null = null
   public ride: Ride | Entity<Ride> | {[key: string]: any} = { 
     departures: [],

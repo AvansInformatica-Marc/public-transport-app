@@ -13,7 +13,6 @@ import { TimetableService } from 'src/app/services/timetable.service';
   styleUrls: ['./item.component.css']
 })
 export class ItemComponent implements OnInit {
-  public settings = localStorage
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
   @Input() ride: Entity<Ride>;

@@ -8,6 +8,7 @@ import { LoginDialogComponent } from '../accounts/login-dialog/login-dialog.comp
 import { ComponentType } from '@angular/cdk/portal';
 import { Entity } from 'src/app/models/Entity';
 import { StopService } from 'src/app/services/stop.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-timetable',
@@ -15,15 +16,14 @@ import { StopService } from 'src/app/services/stop.service';
   styleUrls: ['./timetable.component.css']
 })
 export class TimetableComponent implements OnInit {
-  public settings = localStorage
   public selectedStop?: Entity<Stop>
   public timetable: Entity<Ride>[] = [];
 
-  constructor(protected timetableService: TimetableService, protected stopService: StopService, public dialog: MatDialog){}
+  constructor(protected timetableService: TimetableService, protected stopService: StopService, protected authService: AuthenticationService, public dialog: MatDialog){}
 
   public async ngOnInit() {
-    if(this.settings.getItem("lastStop")){
-      this.selectedStop = await this.stopService.getById(this.settings.getItem("lastStop"))
+    if(localStorage.getItem("lastStop")){
+      this.selectedStop = await this.stopService.getById(localStorage.getItem("lastStop"))
       this.loadTimetable()
     }
   }
@@ -32,7 +32,7 @@ export class TimetableComponent implements OnInit {
     const stop = await this.openDialog<Entity<Stop> | null>(SelectorDialogComponent)
     if(stop){
       this.selectedStop = stop
-      this.settings.setItem("lastStop", stop._id)
+      localStorage.setItem("lastStop", stop._id)
       this.loadTimetable()
     }
   }
@@ -43,11 +43,11 @@ export class TimetableComponent implements OnInit {
 
   public async login(){
     const token = await this.openDialog<string | null>(LoginDialogComponent)
-    if(token) this.settings.setItem("accountToken", token)
+    if(token) await this.authService.login(token)
   }
 
   public logout(){
-    this.settings.removeItem("accountToken")
+    this.authService.logout()
   }
 
   private openDialog<T, C = any>(component: ComponentType<C>): Promise<T>{

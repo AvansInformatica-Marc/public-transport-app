@@ -6,6 +6,7 @@ import { StopService } from 'src/app/services/stop.service';
 import { OperatorService } from 'src/app/services/operator.service';
 import { TrainService } from 'src/app/services/train.service';
 import { Entity } from 'src/app/models/Entity';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-details',
@@ -13,12 +14,11 @@ import { Entity } from 'src/app/models/Entity';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-  public settings = localStorage
   public ride?: Entity<Ride>
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   public stopDisplayList: any = []
 
-  constructor(protected route: ActivatedRoute, protected timetableService: TimetableService, protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService) {}
+  constructor(protected route: ActivatedRoute, protected timetableService: TimetableService, protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService, public authService: AuthenticationService) {}
 
   public ngOnInit() {
     (this.route.firstChild || this.route).params.subscribe(async params => {

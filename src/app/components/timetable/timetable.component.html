@@ -12,7 +12,7 @@
     </mat-menu>
 </header>
 <main>
-  <app-timetable-item *ngFor="let ride of timetable" [ride]="ride" routerLink="/timetable/{{ride._id}}"></app-timetable-item>
+  <app-timetable-item *ngFor="let ride of timetable" [ride]="ride"></app-timetable-item>
 </main>
 
 <button mat-fab *ngIf="selectedStop && settings.getItem('accountToken')" routerLink="/timetable/new" style="position:fixed; bottom: 32px; right: 32px; background-color: #003082;"><mat-icon>add</mat-icon></button>

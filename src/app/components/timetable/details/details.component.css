@@ -1,0 +1,25 @@
+main {
+    margin: 0px 16px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td {
+    padding: 0px 8px;
+}
+
+svg {
+    display: block;
+}
+
+header {
+    background-color: #003082; 
+    color: #FAFAFA; 
+    padding: 4px 32px; 
+    position: relative;
+    display: flex;
+    align-items: center;
+}

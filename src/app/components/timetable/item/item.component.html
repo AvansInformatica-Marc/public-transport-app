@@ -4,7 +4,8 @@
 </p>
 
 <div *ngFor="let train of ride.train" style="display: inline-block;">
-  <img *ngIf="train.image" src="{{train.image}}" style="max-height: 50px;">
+  <img *ngIf="train.image" src="{{train.image}}" style="max-height: 50px;"><br>
+  <mat-chip routerLink="/trains/{{train._id}}">{{train.name}} by {{train.manufacturer}}</mat-chip>
 </div>
 
 <p>
@@ -17,6 +18,7 @@
 
 <div style="display: flex;">
   <span style="flex: 1 1 auto;"></span>
+  <button mat-raised-button routerLink="/timetable/{{ride._id}}">More details</button>
   <button mat-raised-button *ngIf="settings.getItem('accountToken')" routerLink="/timetable/{{ride._id}}/edit">Edit</button>
 </div>
 

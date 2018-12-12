@@ -4,6 +4,7 @@ import { OperatorService } from 'src/app/services/operator.service';
 import { StopService } from 'src/app/services/stop.service';
 import Ride from 'src/app/models/Ride';
 import { Entity } from 'src/app/models/Entity';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-timetable-item',

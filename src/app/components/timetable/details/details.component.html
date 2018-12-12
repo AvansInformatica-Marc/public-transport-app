@@ -1,3 +1,48 @@
-<p>
-  details works!
-</p>
+<header>
+  <h3 *ngIf="!ride">Ride details</h3>
+  <h3 *ngIf="ride">{{ride.operator.name}} {{ride.type}}<span *ngIf="ride.stops[ride.stops.length - 1].stop.name"> to {{ride.stops[ride.stops.length - 1].stop.name}}</span></h3>
+</header>
+<main *ngIf="ride">
+  <table>
+    <tr *ngFor="let stop of stopDisplayList">
+      <td>
+        <i *ngIf="stop.displayTime">{{stop.displayTime}} min.</i>
+      </td>
+      <td>
+        <svg height="56" width="26" *ngIf="!stop.displayTime">
+          <circle r="10" cy="28" cx="13" style="fill:#003082"/>
+          <rect y="0" x="9" height="28" width="8" style="fill:#003082" />
+          <rect y="28" x="9" height="28" width="8" style="fill:#003082" *ngIf="stop != stopDisplayList[stopDisplayList.length - 1]"/>
+        </svg>
+        <svg height="28" width="26" *ngIf="stop.displayTime">
+          <rect y="0" x="9" height="28" width="8" style="fill:#003082" />
+        </svg>
+      </td>
+      <td>
+        <span *ngIf="!stop.displayTime">
+          <b>{{stop.stop.name}}</b>
+          <span *ngIf="stop.platform"> on platform {{stop.platform}}</span>
+          <span *ngIf="stop.waitingTime"> (waits {{stop.waitingTime}} min. on stop)</span>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <br><mat-divider></mat-divider><br>
+  
+  <div *ngFor="let train of ride.train" style="display: inline-block;">
+    <img *ngIf="train.image" src="{{train.image}}" style="max-height: 50px;"><br>
+    <mat-chip routerLink="/trains/{{train._id}}">{{train.name}} by {{train.manufacturer}}</mat-chip>
+  </div>
+  
+  <p>
+    Departures: <mat-chip-list><mat-chip *ngFor="let departure of ride.departures">{{departure}}</mat-chip></mat-chip-list>
+  </p>
+  
+  <p *ngIf="ride.excludeDays.length > 0">
+    Not on: <mat-chip-list><mat-chip *ngFor="let exclusion of ride.excludeDays">{{days[exclusion]}}</mat-chip></mat-chip-list>
+  </p>
+</main>
+<main *ngIf="!ride">
+  <p>No ride selected</p>
+</main>

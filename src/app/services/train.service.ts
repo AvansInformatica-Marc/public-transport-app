@@ -18,7 +18,7 @@ export class TrainService implements Repository<Train> {
     const cachedItem = this.cache.getById(id)
     if(cachedItem) return cachedItem
 
-    const response = await this.http.get<Train>(`${TrainService.apiUrl}/${id}`).toPromise()
+    const response = await this.http.get<Entity<Train>>(`${TrainService.apiUrl}/${id}`).toPromise()
     this.cache.add(response)
     return response
   }

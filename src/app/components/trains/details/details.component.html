@@ -1,0 +1,15 @@
+<header>
+  <mat-toolbar class="mat-elevation-z4">
+    <span>Train details</span>
+  </mat-toolbar>
+</header>
+<main *ngIf="train">
+  <p><b>Name:</b> {{train.name}}</p>
+  <p><b>Manufacturer:</b> {{train.manufacturer}}</p>
+  <p><b>Length:</b> {{train.length}} parts</p>
+  <p><b>Image:</b> </p>
+  <img *ngIf="train.image" src="{{train.image}}" style="max-height: 75px;"><br>
+</main>
+<main *ngIf="!train">
+  <p>No train selected</p>
+</main>

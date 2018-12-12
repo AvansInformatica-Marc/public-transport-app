@@ -14,6 +14,7 @@ import { AuthInterceptor } from './services/AuthInterceptor';
 import { LoginDialogComponent } from './components/accounts/login-dialog/login-dialog.component';
 import { EditComponent } from './components/timetable/edit/edit.component';
 import { DetailsComponent } from './components/timetable/details/details.component';
+import { TrainDetailsComponent } from './components/trains/details/details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DetailsComponent } from './components/timetable/details/details.compone
     SelectorDialogComponent,
     LoginDialogComponent,
     EditComponent,
-    DetailsComponent
+    DetailsComponent,
+    TrainDetailsComponent
   ],
   imports: [
     BrowserModule,

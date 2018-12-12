@@ -16,7 +16,7 @@ export default class Cache<T>{
     }
   
     public update(id: string, model: T){
-      const entity: Entity<T> = model
+      const entity: Entity<T> = model as Entity<T>
       entity._id = id
       this.cache.splice(this.cache.findIndex(it => it._id == id), 1, entity)
     }

@@ -1,6 +1,6 @@
 <p style="clear: both;">
-  <span *ngIf="ride.stops[ride.stops.length - 1].stop.name" style="font-weight: bold;"><span *ngIf="ride.line">{{ride.line}} </span>{{ride.stops[ride.stops.length - 1].stop.name}}</span>
-  <span style="float:right;"><img *ngIf="ride.operator.logo" src="{{ride.operator.logo}}" style="max-height: 1em;vertical-align: middle;"> {{ride.type}}</span>
+  <span *ngIf="direction" style="font-weight: bold;"><span *ngIf="ride.line">{{ride.line}} </span>{{direction}}</span>
+  <span style="float:right;"><img *ngIf="operatorLogo" src="{{operatorLogo}}" style="max-height: 1em;vertical-align: middle;"> {{ride.type}}</span>
 </p>
 
 <div *ngFor="let train of ride.train" style="display: inline-block;">

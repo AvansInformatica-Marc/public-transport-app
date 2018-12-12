@@ -6,6 +6,8 @@ import Ride from 'src/app/models/Ride';
 import { Entity } from 'src/app/models/Entity';
 import { Router } from '@angular/router';
 import { TimetableService } from 'src/app/services/timetable.service';
+import Stop from 'src/app/models/Stop';
+import Operator from 'src/app/models/Operator';
 
 @Component({
   selector: 'app-timetable-item',
@@ -16,6 +18,14 @@ export class ItemComponent implements OnInit {
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
   @Input() ride: Entity<Ride>;
+
+  public get direction(): string | undefined {
+    return (this.ride.stops[this.ride.stops.length - 1].stop as Stop).name
+  }
+
+  public get operatorLogo(): string | undefined {
+    return (this.ride.operator as Operator).logo
+  }
 
   constructor(protected timetableService: TimetableService, protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService){}
 

@@ -19,7 +19,7 @@ export class TimetableComponent implements OnInit {
   public selectedStop?: Entity<Stop>
   public timetable: Entity<Ride>[] = [];
 
-  constructor(protected timetableService: TimetableService, protected stopService: StopService, protected authService: AuthenticationService, public dialog: MatDialog){}
+  constructor(protected timetableService: TimetableService, protected stopService: StopService, public authService: AuthenticationService, public dialog: MatDialog){}
 
   public async ngOnInit() {
     if(localStorage.getItem("lastStop")){

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { StopService } from 'src/app/services/stop.service';
 import { OperatorService } from 'src/app/services/operator.service';
 import { TrainService } from 'src/app/services/train.service';
+import { Entity } from 'src/app/models/Entity';
 
 @Component({
   selector: 'app-details',
@@ -12,7 +13,7 @@ import { TrainService } from 'src/app/services/train.service';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
-  public ride?: Ride
+  public ride?: Entity<Ride>
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   public stopDisplayList: any = []
 

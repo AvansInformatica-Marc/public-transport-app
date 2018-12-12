@@ -1,5 +1,25 @@
-# PublicTransport
+# Public Transport
+## Web URL
+https://public-transport-app.herokuapp.com/
 
+## Owner
+Marc Bouwman  
+Studentnr. 2125922  
+Informatica klas 2B
+
+## Installing dependencies
+`npm install`
+
+## Start
+`npm start-local`
+
+
+
+---
+
+
+
+# Original README content:
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
 ## Development server

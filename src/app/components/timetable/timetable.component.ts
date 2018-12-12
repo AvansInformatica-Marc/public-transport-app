@@ -9,6 +9,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { Entity } from 'src/app/models/Entity';
 import { StopService } from 'src/app/services/stop.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { OperatorService } from 'src/app/services/operator.service';
 
 @Component({
   selector: 'app-timetable',
@@ -17,9 +18,9 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 })
 export class TimetableComponent implements OnInit {
   public selectedStop?: Entity<Stop>
-  public timetable: Entity<Ride>[] = [];
+  public timetable: Entity<Ride>[] = []
 
-  constructor(protected timetableService: TimetableService, protected stopService: StopService, public authService: AuthenticationService, public dialog: MatDialog){}
+  constructor(protected timetableService: TimetableService, protected stopService: StopService, public operatorService: OperatorService, public authService: AuthenticationService, public dialog: MatDialog){}
 
   public async ngOnInit() {
     if(localStorage.getItem("lastStop")){
@@ -44,6 +45,11 @@ export class TimetableComponent implements OnInit {
   public async login(){
     const token = await this.openDialog<string | null>(LoginDialogComponent)
     if(token) await this.authService.login(token)
+  }
+
+  public async newAccount(){
+    const token = await this.openDialog<string | null>(LoginDialogComponent)
+    if(token) await this.operatorService.create({ name: token })
   }
 
   public logout(){

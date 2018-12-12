@@ -7,6 +7,7 @@ import { SelectorDialogComponent } from '../stops/selector-dialog/selector-dialo
 import { LoginDialogComponent } from '../accounts/login-dialog/login-dialog.component';
 import { ComponentType } from '@angular/cdk/portal';
 import { Entity } from 'src/app/models/Entity';
+import { StopService } from 'src/app/services/stop.service';
 
 @Component({
   selector: 'app-timetable',
@@ -18,14 +19,20 @@ export class TimetableComponent implements OnInit {
   public selectedStop?: Entity<Stop>
   public timetable: Entity<Ride>[] = [];
 
-  constructor(protected timetableService: TimetableService, public dialog: MatDialog){}
+  constructor(protected timetableService: TimetableService, protected stopService: StopService, public dialog: MatDialog){}
 
-  public ngOnInit() {}
+  public async ngOnInit() {
+    if(this.settings.getItem("lastStop")){
+      this.selectedStop = await this.stopService.getById(this.settings.getItem("lastStop"))
+      this.loadTimetable()
+    }
+  }
 
   public async openStopSelector(){
     const stop = await this.openDialog<Entity<Stop> | null>(SelectorDialogComponent)
     if(stop){
       this.selectedStop = stop
+      this.settings.setItem("lastStop", stop._id)
       this.loadTimetable()
     }
   }

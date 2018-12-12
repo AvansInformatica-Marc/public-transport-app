@@ -5,6 +5,7 @@ import { StopService } from 'src/app/services/stop.service';
 import Ride from 'src/app/models/Ride';
 import { Entity } from 'src/app/models/Entity';
 import { Router } from '@angular/router';
+import { TimetableService } from 'src/app/services/timetable.service';
 
 @Component({
   selector: 'app-timetable-item',
@@ -17,7 +18,7 @@ export class ItemComponent implements OnInit {
 
   @Input() ride: Entity<Ride>;
 
-  constructor(protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService){}
+  constructor(protected timetableService: TimetableService, protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService){}
 
   public async ngOnInit(){
     if(typeof this.ride.operator == "string")
@@ -36,5 +37,9 @@ export class ItemComponent implements OnInit {
           this.ride.stops[index].stop = await this.stopService.getById(stop.stop)
       })
     }
+  }
+
+  public async deleteItem(id: string){
+    await this.timetableService.delete(id)
   }
 }

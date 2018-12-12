@@ -3,6 +3,11 @@
 
   <h3 *ngIf="!ride">Ride details</h3>
   <h3 *ngIf="ride">{{ride.operator.name}} {{ride.type}}<span *ngIf="ride.stops[ride.stops.length - 1].stop.name"> to {{ride.stops[ride.stops.length - 1].stop.name}}</span></h3>
+
+  <span style="flex: 1 1 auto;"></span>
+
+  <button mat-icon-button *ngIf="settings.getItem('accountToken')" routerLink="/timetable/{{ride._id}}/edit"><mat-icon>edit</mat-icon></button>
+  <button mat-icon-button *ngIf="settings.getItem('accountToken')" (click)="deleteItem(ride._id)"><mat-icon>delete</mat-icon></button>
 </header>
 <main *ngIf="ride">
   <table>

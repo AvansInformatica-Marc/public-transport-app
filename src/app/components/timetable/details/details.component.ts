@@ -13,6 +13,7 @@ import { Entity } from 'src/app/models/Entity';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  public settings = localStorage
   public ride?: Entity<Ride>
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   public stopDisplayList: any = []
@@ -48,5 +49,9 @@ export class DetailsComponent implements OnInit {
         }
       }
     })
+  }
+
+  public async deleteItem(id: string){
+    await this.timetableService.delete(id)
   }
 }

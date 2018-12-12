@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  public ngOnInit() {}
 }

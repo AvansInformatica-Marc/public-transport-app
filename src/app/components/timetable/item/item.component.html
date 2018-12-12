@@ -8,17 +8,20 @@
   <mat-chip routerLink="/trains/{{train._id}}">{{train.name}} by {{train.manufacturer}}</mat-chip>
 </div>
 
-<p>
-  Departures: <mat-chip-list><mat-chip *ngFor="let departure of ride.departures">{{departure}}</mat-chip></mat-chip-list>
-</p>
+<br><br>
 
-<p *ngIf="ride.excludeDays.length > 0">
+<span>
+  Departures: <mat-chip-list><mat-chip *ngFor="let departure of ride.departures">{{departure}}</mat-chip></mat-chip-list>
+</span>
+
+<br><br>
+
+<span *ngIf="ride.excludeDays.length > 0">
   Not on: <mat-chip-list><mat-chip *ngFor="let exclusion of ride.excludeDays">{{days[exclusion]}}</mat-chip></mat-chip-list>
-</p>
+</span>
 
 <div style="display: flex;">
   <span style="flex: 1 1 auto;"></span>
-  <button mat-raised-button routerLink="/timetable/{{ride._id}}">More details</button>
   <button mat-raised-button *ngIf="settings.getItem('accountToken')" routerLink="/timetable/{{ride._id}}/edit">Edit</button>
 </div>
 

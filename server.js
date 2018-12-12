@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const http2 = require('http2');
 const compression = require('compression');
 
 const app = express();
@@ -29,7 +28,5 @@ app.get('*', (req, res) => {
 // Get port from environment and store in Express.
 const port = process.env.PORT || '4200';
 app.set('port', port);
-// Create HTTP server.
-const server = http2.createServer(app);
 // Listen on provided port, on all network interfaces.
-server.listen(port, () => console.log(`Angular app \'${appname}\' running on port ${port}`));
+app.listen(port, () => console.log(`Angular app \'${appname}\' running on port ${port}`));

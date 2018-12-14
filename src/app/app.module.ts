@@ -17,6 +17,7 @@ import { LoginDialogComponent } from "./components/accounts/login-dialog/login-d
 import { EditComponent } from "./components/timetable/edit/edit.component"
 import { DetailsComponent } from "./components/timetable/details/details.component"
 import { TrainDetailsComponent } from "./components/trains/details/details.component"
+import { TrainsComponent } from "./components/trains/trains.component"
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { TrainDetailsComponent } from "./components/trains/details/details.compo
     LoginDialogComponent,
     EditComponent,
     DetailsComponent,
-    TrainDetailsComponent
+    TrainDetailsComponent,
+    TrainsComponent
   ],
   imports: [
     BrowserModule,

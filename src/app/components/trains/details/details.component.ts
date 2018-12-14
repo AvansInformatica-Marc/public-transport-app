@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core"
 import { TrainService } from "src/app/services/train.service"
 import Train from "src/app/models/Train"
 import { ActivatedRoute } from "@angular/router"
+import { Entity } from "src/app/models/Entity"
 
 @Component({
   selector: "app-details",
@@ -9,7 +10,7 @@ import { ActivatedRoute } from "@angular/router"
   styleUrls: ["./details.component.css"]
 })
 export class TrainDetailsComponent implements OnInit {
-  public train?: Train
+  public train?: Entity<Train>
 
   constructor(protected route: ActivatedRoute, protected trainService: TrainService) {}
 

@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import Ride from 'src/app/models/Ride';
-import { TimetableService } from 'src/app/services/timetable.service';
-import { ActivatedRoute } from '@angular/router';
-import { StopService } from 'src/app/services/stop.service';
-import { OperatorService } from 'src/app/services/operator.service';
-import { TrainService } from 'src/app/services/train.service';
-import { Entity } from 'src/app/models/Entity';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Component, OnInit } from "@angular/core"
+import Ride from "src/app/models/Ride"
+import { TimetableService } from "src/app/services/timetable.service"
+import { ActivatedRoute } from "@angular/router"
+import { StopService } from "src/app/services/stop.service"
+import { OperatorService } from "src/app/services/operator.service"
+import { TrainService } from "src/app/services/train.service"
+import { Entity } from "src/app/models/Entity"
+import { AuthenticationService } from "src/app/services/authentication.service"
 
 @Component({
-  selector: 'app-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  selector: "app-details",
+  templateUrl: "./details.component.html",
+  styleUrls: ["./details.component.css"]
 })
 export class DetailsComponent implements OnInit {
   public ride?: Entity<Ride>
@@ -22,27 +22,27 @@ export class DetailsComponent implements OnInit {
 
   public ngOnInit() {
     (this.route.firstChild || this.route).params.subscribe(async params => {
-      if(params && params['id']){ 
-        this.ride = await this.timetableService.getById(params['id'])
+      if (params && params["id"]) {
+        this.ride = await this.timetableService.getById(params["id"])
 
-        if(typeof this.ride.operator == "string")
+        if (typeof this.ride.operator == "string")
           this.ride.operator = await this.operatorService.getById(this.ride.operator)
 
-        if(this.ride.train){
+        if (this.ride.train) {
           this.ride.train.forEach(async (trainId, index) => {
-            if(typeof trainId == "string")
+            if (typeof trainId == "string")
               this.ride.train[index] = await this.trainService.getById(trainId)
           })
         }
 
-        if(this.ride.stops){
+        if (this.ride.stops) {
           this.ride.stops = await Promise.all(this.ride.stops.map(async stop => {
-            if(typeof stop.stop == "string")
+            if (typeof stop.stop == "string")
               stop.stop = await this.stopService.getById(stop.stop)
             return stop
           }))
           this.ride.stops.forEach(stop => {
-            if(stop.arrivalAfter) 
+            if (stop.arrivalAfter)
               this.stopDisplayList.push({displayTime: stop.arrivalAfter})
             this.stopDisplayList.push(stop)
           })
@@ -51,7 +51,7 @@ export class DetailsComponent implements OnInit {
     })
   }
 
-  public async deleteItem(id: string){
+  public async deleteItem(id: string) {
     await this.timetableService.delete(id)
   }
 }

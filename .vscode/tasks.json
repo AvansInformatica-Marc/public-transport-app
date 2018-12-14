@@ -21,6 +21,16 @@
             "type": "npm",
             "script": "start-local",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "lint",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "lint-fix",
+            "problemMatcher": []
         }
     ]
 }

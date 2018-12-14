@@ -10,6 +10,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "lint-fix": "tslint --fix src/**/*.ts -t verbose && tslint --fix e2e/**/*.ts -t verbose",
     "e2e": "ng e2e"
   },
   "engines": {

@@ -1,0 +1,12 @@
+<header>
+  <mat-toolbar class="mat-elevation-z4">
+    <span>Train overview</span>
+  </mat-toolbar>
+</header>
+<main>
+  <div *ngFor="let train of trains" routerLink="/trains/{{train._id}}">
+    <p>{{train.name}} by {{train.manufacturer}}</p>
+    <img *ngIf="train.image" src="{{train.image}}" style="max-height: 50px;"><br>
+    <mat-divider></mat-divider><br>
+  </div>
+</main>

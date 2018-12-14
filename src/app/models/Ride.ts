@@ -1,6 +1,6 @@
-import Operator from './Operator';
-import Train from './Train';
-import Stop from './Stop';
+import Operator from "./Operator"
+import Train from "./Train"
+import Stop from "./Stop"
 
 export default interface Ride {
     operator: string | Operator // NS, Qbuzz
@@ -8,7 +8,7 @@ export default interface Ride {
     train?: (string | Train)[], // ID
     bus?: string // ID
     line?: string // 8, 491
-    stops: { 
+    stops: {
         stop: string | Stop // Sliedrecht Baanhoek, Station Dordrecht
         platform?: string // 15, 4b, P
         arrivalAfter?: number // Time between this and previous stop

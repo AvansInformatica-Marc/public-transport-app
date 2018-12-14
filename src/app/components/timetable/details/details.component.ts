@@ -18,26 +18,28 @@ export class DetailsComponent implements OnInit {
   public days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
   public stopDisplayList: any = []
 
-  constructor(protected route: ActivatedRoute, protected timetableService: TimetableService, protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService, public authService: AuthenticationService) {}
+  constructor(protected route: ActivatedRoute, protected timetableService: TimetableService,
+    protected stopService: StopService, protected operatorService: OperatorService,
+    protected trainService: TrainService, public authService: AuthenticationService) {}
 
   public ngOnInit() {
     (this.route.firstChild || this.route).params.subscribe(async params => {
       if (params && params["id"]) {
         this.ride = await this.timetableService.getById(params["id"])
 
-        if (typeof this.ride.operator == "string")
+        if (typeof this.ride.operator === "string")
           this.ride.operator = await this.operatorService.getById(this.ride.operator)
 
         if (this.ride.train) {
           this.ride.train.forEach(async (trainId, index) => {
-            if (typeof trainId == "string")
+            if (typeof trainId === "string")
               this.ride.train[index] = await this.trainService.getById(trainId)
           })
         }
 
         if (this.ride.stops) {
           this.ride.stops = await Promise.all(this.ride.stops.map(async stop => {
-            if (typeof stop.stop == "string")
+            if (typeof stop.stop === "string")
               stop.stop = await this.stopService.getById(stop.stop)
             return stop
           }))

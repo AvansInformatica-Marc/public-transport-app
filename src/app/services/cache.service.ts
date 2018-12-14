@@ -12,20 +12,20 @@ export class CacheService<T> {
   }
 
   public getById(id: string): Entity<T> | null {
-    return this.cache.find(it => it._id == id) || null
+    return this.cache.find(it => it._id === id) || null
   }
 
   public doesItemExist(id: string): boolean {
-    return this.cache.some(it => it._id == id)
+    return this.cache.some(it => it._id === id)
   }
 
   public update(id: string, model: T) {
     const entity: Entity<T> = model as Entity<T>
     entity._id = id
-    this.cache.splice(this.cache.findIndex(it => it._id == id), 1, entity)
+    this.cache.splice(this.cache.findIndex(it => it._id === id), 1, entity)
   }
 
   public delete(id: string) {
-    this.cache.splice(this.cache.findIndex(it => it._id == id), 1)
+    this.cache.splice(this.cache.findIndex(it => it._id === id), 1)
   }
 }

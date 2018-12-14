@@ -24,14 +24,17 @@ export class EditComponent implements OnInit {
   public days = { 0: false, 1: false, 2: false, 3: false, 4: false, 5: false, 6: false }
   public readonly separatorKeysCodes: number[] = [ENTER, COMMA, SPACE]
 
-  constructor(protected route: ActivatedRoute, protected timetableService: TimetableService, protected stopService: StopService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(protected route: ActivatedRoute, protected timetableService: TimetableService,
+    protected stopService: StopService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   public ngOnInit() {
     (this.route.firstChild || this.route).params.subscribe(async params => {
       if (params && params["id"]) {
         this.id = params["id"]
         const ride = await this.timetableService.getById(params["id"])
-        Object.keys(this.days).map(it => parseInt(it)).forEach(it => this.days[it] = !ride.excludeDays.includes(it as 0 | 1 | 2 | 3 | 4 | 5 | 6))
+        Object.keys(this.days)
+          .map(it => parseInt(it, 10))
+          .forEach(it => this.days[it] = !ride.excludeDays.includes(it as 0 | 1 | 2 | 3 | 4 | 5 | 6))
         ride.stops = await Promise.all(ride.stops.map(async it => {
           (it as any).name = (await this.stopService.getById((it.stop as any)._id || it.stop)).name
           return it
@@ -46,7 +49,7 @@ export class EditComponent implements OnInit {
     if ((model as Entity<Ride>)._id)
       (model as Entity<Ride>)._id = undefined
 
-    if (model.departures.length == 0) {
+    if (model.departures.length === 0) {
       this.snackBar.open(`A ride must depart at least once`, "Ok")
       return
     }
@@ -63,9 +66,11 @@ export class EditComponent implements OnInit {
 
     model.stops[0].arrivalAfter = undefined
     model.stops[0].waitingTime = undefined
-    model.excludeDays = Object.keys(this.days).map(it => parseInt(it)).filter(it => !this.days[it]) as (0 | 1 | 2 | 3 | 4 | 5 | 6)[]
+    model.excludeDays = Object.keys(this.days)
+      .map(it => parseInt(it, 10))
+      .filter(it => !this.days[it]) as (0 | 1 | 2 | 3 | 4 | 5 | 6)[]
 
-    if (model.excludeDays.length == 7) {
+    if (model.excludeDays.length === 7) {
       this.snackBar.open(`A ride must ride on at least 1 day`, "Ok")
       return
     }

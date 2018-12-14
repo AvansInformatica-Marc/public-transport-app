@@ -32,7 +32,8 @@ export class AuthenticationService {
 
   public async login(token: string) {
     localStorage.setItem("token", token)
-    const response = await this.http.get<Entity<Operator> | { admin: true }>(`https://ov-api.herokuapp.com/api/v1/operators/@me`).toPromise()
+    const response = await this.http.get<Entity<Operator> | { admin: true }>(`https://ov-api.herokuapp.com/api/v1/operators/@me`)
+      .toPromise()
     this.user = response
   }
 

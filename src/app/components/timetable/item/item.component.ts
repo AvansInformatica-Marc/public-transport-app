@@ -4,7 +4,6 @@ import { OperatorService } from "src/app/services/operator.service"
 import { StopService } from "src/app/services/stop.service"
 import Ride from "src/app/models/Ride"
 import { Entity } from "src/app/models/Entity"
-import { Router } from "@angular/router"
 import { TimetableService } from "src/app/services/timetable.service"
 import Stop from "src/app/models/Stop"
 import Operator from "src/app/models/Operator"
@@ -27,22 +26,23 @@ export class ItemComponent implements OnInit {
     return (this.ride.operator as Operator).logo
   }
 
-  constructor(protected timetableService: TimetableService, protected stopService: StopService, protected operatorService: OperatorService, protected trainService: TrainService) {}
+  constructor(protected timetableService: TimetableService, protected stopService: StopService,
+    protected operatorService: OperatorService, protected trainService: TrainService) {}
 
   public async ngOnInit() {
-    if (typeof this.ride.operator == "string")
+    if (typeof this.ride.operator === "string")
       this.ride.operator = await this.operatorService.getById(this.ride.operator)
 
     if (this.ride.train) {
       this.ride.train.forEach(async (trainId, index) => {
-        if (typeof trainId == "string")
+        if (typeof trainId === "string")
           this.ride.train[index] = await this.trainService.getById(trainId)
       })
     }
 
     if (this.ride.stops) {
       this.ride.stops.forEach(async (stop, index) => {
-        if (typeof stop.stop == "string")
+        if (typeof stop.stop === "string")
           this.ride.stops[index].stop = await this.stopService.getById(stop.stop)
       })
     }

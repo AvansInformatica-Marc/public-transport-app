@@ -6,7 +6,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { AppRoutingModule } from "./app-routing.module"
 import { AppComponent } from "./app.component"
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
-import { MatFormFieldModule, MatAutocompleteModule, MatInputModule, MatDividerModule, MatDialogModule, MatButtonModule, MatIconModule, MatToolbarModule, MatChipsModule, MatMenuModule, MatCheckboxModule, MatSnackBarModule } from "@angular/material"
+import { MatFormFieldModule, MatAutocompleteModule, MatInputModule, MatDividerModule, MatDialogModule,
+  MatButtonModule, MatIconModule, MatToolbarModule, MatChipsModule, MatMenuModule, MatCheckboxModule,
+  MatSnackBarModule } from "@angular/material"
 import { TimetableComponent } from "./components/timetable/timetable.component"
 import { ItemComponent } from "./components/timetable/item/item.component"
 import { SelectorDialogComponent } from "./components/stops/selector-dialog/selector-dialog.component"
